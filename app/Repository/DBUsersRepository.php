@@ -3,9 +3,8 @@
 namespace App\Repository;
 
 use App\Models\User;
-use App\RepositoryInterface\StandardRepositoryInterface;
 
-class DBUsersRepository implements StandardRepositoryInterface{
+class DBUsersRepository{
 
     public function all(){
 

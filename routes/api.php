@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\RegistreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 
@@ -19,6 +19,8 @@ Route::middleware(['web', 'api'])->group(function () {
         Route::middleware(['auth:sanctum'])->group(function () {
             // All Route Application
             Route::get('user',[LoginController::class,'user']);
+
+            Route::post('registre',[RegistreController::class,'registre']);
         });
 
     });
