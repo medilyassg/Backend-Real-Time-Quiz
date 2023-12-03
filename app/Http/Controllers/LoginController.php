@@ -2,35 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use App\Http\Resources\UserResource;
 
 use Illuminate\Support\Facades\Auth;
-
-use Illuminate\Validation\ValidationException;
 
 use App\Http\Controllers\Controller;
 
 
 class LoginController extends Controller
 {
-    public function login(Request $request){
-        $credentials=$request->validate([
-            'email'=>'required',
-            'password'=>'required'
-        ]);
 
-        if(! Auth::attempt($credentials)){
-            throw ValidationException::withMessages([
-                'email'=>[
-                    __('auth.failed')
-                ]
+    
+    public function __construct()
+    {
+        $this->middleware('throttle:3,1')->only('login');
+
+    }
+
+    public function login(LoginRequest $request){
+        $request->authenticate();
+        
+        return UserResource::make(auth()->user())
+            ->additional([
+                'message' => 'Logged in successful.'
             ]);
-        }
-
-        return $request->user();
     }
 
     public function logout(){
-        return Auth::logout();
+
+        Auth::guard('web')->logout();
+        
+        return response()->json(
+            [
+                'message' => 'Logged out'
+            ]
+        );
+    }
+
+    public function user()
+    {
+        return UserResource::make(auth()->user());
     }
 }
