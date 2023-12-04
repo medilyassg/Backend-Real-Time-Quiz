@@ -12,7 +12,7 @@ Route::middleware(['web', 'api'])->group(function () {
         Route::group(['prefix' => 'auth'], function () {
 
             Route::post('login',[LoginController::class,'login']);
-
+            Route::post('registre',[RegistreController::class,'registre']);
             Route::post('logout',[LoginController::class,'logout'])->middleware('auth:sanctum');
         });
 
@@ -20,7 +20,7 @@ Route::middleware(['web', 'api'])->group(function () {
             // All Route Application
             Route::get('user',[LoginController::class,'user']);
 
-            Route::post('registre',[RegistreController::class,'registre']);
+            
         });
 
     });
