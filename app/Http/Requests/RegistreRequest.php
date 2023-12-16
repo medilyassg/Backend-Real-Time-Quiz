@@ -22,11 +22,16 @@ class RegistreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|unique:users|regex:/^[a-zA-Z0-9._-]+@(outlook\.com|hotmail\.com|live\.com|msn\.com|google\.com)$/',
+            'email' => [
+                'required',
+                'email',
+                'unique:users',
+                'regex:/^[a-zA-Z0-9._%+-]+@(outlook\.com|hotmail\.com|live\.com|msn\.com|google\.com|gmail\.com)$/i',
+            ],
             'name' => 'required|string|max:50',
-            'password' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_+=])[A-Za-z\d!@#$%^&*()-_+=]{8,}$/'
+            'password' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_+=])[A-Za-z\d!@#$%^&*()-_+=]{8,}$/',
         ];
-    }
+    }    
 
     /**
      *  Filters to be applied to the input.
@@ -40,5 +45,4 @@ class RegistreRequest extends FormRequest
             'name' => 'trim|capitalize|escape'
         ];
     }
-
 }

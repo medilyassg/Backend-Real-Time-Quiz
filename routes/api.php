@@ -11,19 +11,15 @@ Route::middleware(['web', 'api'])->group(function () {
     Route::prefix('v1')->group(function () {
         Route::group(['prefix' => 'auth'], function () {
 
-            Route::post('login',[LoginController::class,'login']);
+            Route::post('login', [LoginController::class, 'login']);
 
-            Route::post('logout',[LoginController::class,'logout'])->middleware('auth:sanctum');
+            Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
         });
 
+        Route::post('registre', [RegistreController::class, 'registre']);
         Route::middleware(['auth:sanctum'])->group(function () {
             // All Route Application
-            Route::get('user',[LoginController::class,'user']);
-
-            Route::post('registre',[RegistreController::class,'registre']);
+            Route::get('user', [LoginController::class, 'user']);
         });
-
     });
 });
-
-
