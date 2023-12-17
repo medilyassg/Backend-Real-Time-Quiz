@@ -1,0 +1,26 @@
+# List all options
+GET http://127.0.0.1:8000/api/v1/options
+###
+# Show a specific option
+GET http://127.0.0.1:8000/api/v1/options/1
+###
+# Create a new option
+POST http://127.0.0.1:8000/api/v1/options
+Content-Type: application/json
+
+{
+  "text": "New Option",
+  "correct": true,
+  "questionId": 1
+}
+###
+# Update an existing option
+PUT http://127.0.0.1:8000/api/v1/options/1
+Content-Type: application/json
+
+{
+  "text": "Updated Option"
+}
+###
+# Delete an option
+DELETE http://127.0.0.1:8000/api/v1/options/1
