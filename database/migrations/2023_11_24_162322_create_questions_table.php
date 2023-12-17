@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('points');
             $table->unsignedBigInteger('quizId')->nullable();
             $table->foreign('quizId')->references('id')->on('quizzes')->onDelete('set null');
+            $table->index(['text', 'correctOption']);
             $table->timestamps();
         });
     }
