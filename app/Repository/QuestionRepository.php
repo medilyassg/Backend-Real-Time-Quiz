@@ -16,14 +16,19 @@ class QuestionRepository
         return Question::create($data);
     }
 
-    public function update(Question $quiz, array $data)
-    {
-        $quiz->update($data);
-        return $quiz;
+    public function find(Question $question){
+        
+        return $question;
     }
 
-    public function delete(Question $quiz)
+    public function update(Question $question, array $data)
     {
-        $quiz->delete();
+        $question->update($data);
+        return $question;
+    }
+
+    public function delete(Question $question)
+    {
+        $question->delete();
     }
 }
