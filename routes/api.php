@@ -1,11 +1,10 @@
 <?php
 
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\RegistreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-
-
 
 Route::middleware(['web', 'api'])->group(function () {
 
@@ -22,11 +21,21 @@ Route::middleware(['web', 'api'])->group(function () {
             // All Route Application
             Route::get('user', [LoginController::class, 'user']);
 
+            // Quiz
             Route::prefix('quizzes')->group(function () {
                 Route::get('/', [QuizController::class, 'index']);
                 Route::post('/', [QuizController::class, 'store']);
                 Route::put('{quiz}', [QuizController::class, 'update']);
                 Route::delete('{quiz}', [QuizController::class, 'destroy']);
+            });
+
+            // Question
+            Route::prefix('question')->group(function () {
+                Route::get('/', [QuestionController::class, 'index']);
+                Route::get('/{question}', [QuestionController::class, 'show']);
+                Route::post('/', [QuestionController::class, 'store']);
+                Route::put('{question}', [QuestionController::class, 'update']);
+                Route::delete('{question}', [QuestionController::class, 'destroy']);
             });
         });
     });

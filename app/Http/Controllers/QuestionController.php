@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\QuestionRequest;
 use App\Http\Resources\QuestionResource;
+use App\Models\Question;
 use App\Repository\QuestionRepository;
-use Termwind\Question;
 
 class QuestionController extends Controller
 {
@@ -20,7 +20,7 @@ class QuestionController extends Controller
 
     public function index()
     {
-        return QuestionResource::make($this->questionRepository->all());
+        return QuestionResource::collection($this->questionRepository->all());
     }
 
 
@@ -28,7 +28,7 @@ class QuestionController extends Controller
     {
         if($request->validated()){
             $this->questionRepository->create($request->validated());
-            return QuestionResource::make($this->questionRepository->all());
+            return QuestionResource::collection($this->questionRepository->all());
         }
         return response()->json(["message"=>'data not valid'],400);
     }
@@ -45,7 +45,7 @@ class QuestionController extends Controller
     {
         if($request->validated()){
             $this->questionRepository->update($question,$request->validated());
-            return QuestionResource::make($this->questionRepository->all());
+            return QuestionResource::collection($this->questionRepository->all());
         }
         return response()->json(["message"=>'data not valid or resource not found'],400);
     }

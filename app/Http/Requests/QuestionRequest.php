@@ -23,7 +23,7 @@ class QuestionRequest extends FormRequest
     {
         return [
             "text"=>"required|string",
-            "correctOption"=>"nullable|exists:options,id",
+            "correctOption"=>"nullable|exists:options,id|numeric",
             "points"=>"required|numeric",
             "quizId"=>"nullable|exists:quizzes,id"
         ];

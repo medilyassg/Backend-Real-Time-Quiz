@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Option;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Quiz;
 
@@ -20,7 +19,7 @@ class QuestionFactory extends Factory
     {
         return [
         'text' => $this->faker->sentence,
-        'correctOption' => Option::factory(),
+        'correctOption' => $this->faker->numberBetween(1, 4),
         'points' => $this->faker->numberBetween(1, 10),
         'quizId' => Quiz::factory(),
         ];

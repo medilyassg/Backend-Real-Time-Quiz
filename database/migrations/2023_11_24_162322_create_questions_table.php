@@ -14,12 +14,10 @@ return new class extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->text('text');
-            $table->unsignedBigInteger('correctOption')->nullable();
+            $table->integer('correctOption')->nullable();
             $table->integer('points');
             $table->unsignedBigInteger('quizId')->nullable();
             $table->foreign('quizId')->references('id')->on('quizzes')->onDelete('set null');
-            $table->foreign('correctOption')->references('id')->on('options')->onDelete('set null');
-            $table->index('text');
             $table->timestamps();
         });
     }
