@@ -20,7 +20,7 @@ Route::middleware(['web', 'api'])->group(function () {
         Route::post('registre', [RegistreController::class, 'registre']);
 
         Route::middleware(['auth:sanctum'])->group(function () {
-            // All Route Application
+            // ###             All Route Application             ### // 
             Route::get('user', [LoginController::class, 'user']);
 
             // Quiz
