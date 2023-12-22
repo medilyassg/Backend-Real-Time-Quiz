@@ -27,8 +27,8 @@ class QuestionController extends Controller
     public function store(QuestionRequest $request)
     {
         if($request->validated()){
-            $this->questionRepository->create($request->validated());
-            return QuestionResource::collection($this->questionRepository->all());
+            $data=$this->questionRepository->create($request->validated());
+            return QuestionResource::make($data);
         }
         return response()->json(["message"=>'data not valid'],400);
     }
