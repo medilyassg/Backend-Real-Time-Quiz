@@ -6,6 +6,7 @@ use App\Http\Controllers\RegistreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OptionController;
+use App\Http\Controllers\WaitingRoomController;
 
 Route::middleware(['web', 'api'])->group(function () {
 
@@ -18,9 +19,14 @@ Route::middleware(['web', 'api'])->group(function () {
         });
 
         Route::post('registre', [RegistreController::class, 'registre']);
+        Route::post('/create-room', [WaitingRoomController::class, 'createRoom']);
+        Route::post('/room-exists', [WaitingRoomController::class, 'roomExists']);
+        Route::post('/join-room', [WaitingRoomController::class, 'joinRoom']);
+        Route::post('/get-players', [WaitingRoomController::class, 'getPlayers']);
+        Route::post('/start-quiz', [WaitingRoomController::class, 'startQuiz']);
 
         Route::middleware(['auth:sanctum'])->group(function () {
-            // ###             All Route Application             ### // 
+            // ###             All Route Application             ### //
             Route::get('user', [LoginController::class, 'user']);
 
             // Quiz
