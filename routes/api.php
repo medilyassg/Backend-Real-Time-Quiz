@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\QuizSessionController;
 use App\Http\Controllers\RegistreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -18,12 +19,17 @@ Route::middleware(['web', 'api'])->group(function () {
             Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
         });
 
+        // Room Session
         Route::post('registre', [RegistreController::class, 'registre']);
         Route::post('/create-room', [WaitingRoomController::class, 'createRoom']);
         Route::post('/room-exists', [WaitingRoomController::class, 'roomExists']);
         Route::post('/join-room', [WaitingRoomController::class, 'joinRoom']);
         Route::post('/get-players', [WaitingRoomController::class, 'getPlayers']);
         Route::post('/start-quiz', [WaitingRoomController::class, 'startQuiz']);
+
+        //Quiz Session
+        Route::post('/get-time', [QuizSessionController::class, 'getTime']);
+        Route::post('/change-time', [QuizSessionController::class, 'changeTime']);
 
         Route::middleware(['auth:sanctum'])->group(function () {
             // ###             All Route Application             ### //

@@ -16,10 +16,10 @@ class WaitingRoomController extends Controller
     {
         $user = Auth::user(); // Assuming you have authentication set up
 
-
-
         $pin =  substr(Str::random(10), 0, 5);;
         // Store the room PIN and host information in cache
+        $time = ["time"=>15];
+        Cache::put("quiz-session-{$pin}", $time, now()->addHours(1));
         $waitingRoom = ['host' => $user, 'players' => []];
         Cache::put("waiting-room-{$pin}", $waitingRoom, now()->addHours(1));
 
@@ -48,8 +48,6 @@ class WaitingRoomController extends Controller
     {
         $pin = $request->input('pin');
         $nickname = $request->input('nickname');
-
-
 
         // Retrieve the waiting room from cache
         $waitingRoom = Cache::get("waiting-room-{$pin}");
