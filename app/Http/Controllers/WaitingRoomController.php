@@ -18,8 +18,9 @@ class WaitingRoomController extends Controller
 
         $pin =  substr(Str::random(10), 0, 5);;
         // Store the room PIN and host information in cache
-        $time = ["time"=>15];
+        $time = ["time"=>17,"index"=>0,"score"=>[]];
         Cache::put("quiz-session-{$pin}", $time, now()->addHours(1));
+
         $waitingRoom = ['host' => $user, 'players' => []];
         Cache::put("waiting-room-{$pin}", $waitingRoom, now()->addHours(1));
 

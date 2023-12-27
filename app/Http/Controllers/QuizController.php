@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Requests\QuizRequest;
 use App\Models\Quiz;
 use App\Repository\QuizRepository;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -19,6 +21,15 @@ class QuizController extends Controller
     public function index()
     {
         $quizzes = $this->quizRepository->all();
+        return response()->json($quizzes);
+    }
+
+    public function allQuiz(Request $request){
+        $pin = $request->input('pin');
+
+        $waitingRoom = Cache::get("waiting-room-{$pin}");
+        $quizzes = $this->quizRepository->find($waitingRoom['host']->id);
+
         return response()->json($quizzes);
     }
 

@@ -9,9 +9,14 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\WaitingRoomController;
 
+
+
 Route::middleware(['web', 'api'])->group(function () {
 
     Route::prefix('v1')->group(function () {
+        // get all data quiz for host and player without auth
+        Route::post('allquiz', [QuizController::class, 'allQuiz']);
+
         Route::group(['prefix' => 'auth'], function () {
 
             Route::post('login', [LoginController::class, 'login']);
@@ -28,7 +33,7 @@ Route::middleware(['web', 'api'])->group(function () {
         Route::post('/start-quiz', [WaitingRoomController::class, 'startQuiz']);
 
         //Quiz Session
-        Route::post('/get-time', [QuizSessionController::class, 'getTime']);
+        Route::post('/get-time', [QuizSessionController::class, 'getDataQuizSession']);
         Route::post('/change-time', [QuizSessionController::class, 'changeTime']);
 
         Route::middleware(['auth:sanctum'])->group(function () {
