@@ -35,6 +35,12 @@ Route::middleware(['web', 'api'])->group(function () {
         //Quiz Session
         Route::post('/get-time', [QuizSessionController::class, 'getDataQuizSession']);
         Route::post('/change-time', [QuizSessionController::class, 'changeTime']);
+        Route::post('/change-index', [QuizSessionController::class, 'changeIndex']);
+        Route::post('/get-score-of-player', [QuizSessionController::class, 'getScoreOfplayer']);
+        Route::post('/change-score', [QuizSessionController::class, 'changeScore']);
+        Route::post('/get-first-time', [QuizSessionController::class, 'getFirstTime']);
+        Route::post('/change-first-time', [QuizSessionController::class, 'changeFirstTime']);
+        Route::delete('/delete-cache', [QuizSessionController::class, 'deleteCache']);
 
         Route::middleware(['auth:sanctum'])->group(function () {
             // ###             All Route Application             ### //

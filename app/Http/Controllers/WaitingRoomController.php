@@ -18,8 +18,8 @@ class WaitingRoomController extends Controller
 
         $pin =  substr(Str::random(10), 0, 5);;
         // Store the room PIN and host information in cache
-        $time = ["time"=>17,"index"=>0,"score"=>[]];
-        Cache::put("quiz-session-{$pin}", $time, now()->addHours(1));
+        $data = ["time"=>17,"index"=>0,"score"=>[]];
+        Cache::put("quiz-session-{$pin}", $data, now()->addHours(1));
 
         $waitingRoom = ['host' => $user, 'players' => []];
         Cache::put("waiting-room-{$pin}", $waitingRoom, now()->addHours(1));
@@ -50,22 +50,22 @@ class WaitingRoomController extends Controller
         $pin = $request->input('pin');
         $nickname = $request->input('nickname');
 
-        // Retrieve the waiting room from cache
         $waitingRoom = Cache::get("waiting-room-{$pin}");
 
-        // Check if the waiting room exists
         if (!$waitingRoom) {
             return response()->json(['error' => 'Invalid PIN. The waiting room does not exist.']);
         }
 
-        // Add the player to the waiting room
+        if (in_array(['nickname' => $nickname], $waitingRoom['players'])) {
+            return response()->json(['error' => 'Duplicate nickname. Please choose a different nickname.']);
+        }
+
         $waitingRoom['players'][] = ['nickname' => $nickname];
         Cache::put("waiting-room-{$pin}", $waitingRoom, now()->addHours(1));
 
-        // Broadcast the player joined event
         broadcast(new PlayerJoined($pin, $nickname));
 
-        return response()->json(['message' => 'Successfully joined the room','room'=>$waitingRoom]);
+        return response()->json(['message' => 'Successfully joined the room', 'room' => $waitingRoom]);
     }
 
     public function getPlayers(Request $request)
