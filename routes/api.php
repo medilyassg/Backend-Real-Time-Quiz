@@ -15,7 +15,7 @@ Route::middleware(['web', 'api'])->group(function () {
 
     Route::prefix('v1')->group(function () {
         // get all data quiz for host and player without auth
-        Route::post('allquiz', [QuizController::class, 'allQuiz']);
+        
 
         Route::group(['prefix' => 'auth'], function () {
 
@@ -33,7 +33,8 @@ Route::middleware(['web', 'api'])->group(function () {
         Route::post('/start-quiz', [WaitingRoomController::class, 'startQuiz']);
 
         //Quiz Session
-        Route::post('/get-time', [QuizSessionController::class, 'getDataQuizSession']);
+        Route::post('allquiz', [QuizController::class, 'allQuiz']);
+        Route::post('/get-data-quiz-session', [QuizSessionController::class, 'getDataQuizSession']);
         Route::post('/change-time', [QuizSessionController::class, 'changeTime']);
         Route::post('/change-index', [QuizSessionController::class, 'changeIndex']);
         Route::post('/get-score-of-player', [QuizSessionController::class, 'getScoreOfplayer']);

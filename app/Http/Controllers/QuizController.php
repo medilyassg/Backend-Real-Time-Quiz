@@ -29,7 +29,6 @@ class QuizController extends Controller
 
         $waitingRoom = Cache::get("waiting-room-{$pin}");
         $quizzes = $this->quizRepository->find($waitingRoom['host']->id);
-
         return response()->json($quizzes);
     }
 
