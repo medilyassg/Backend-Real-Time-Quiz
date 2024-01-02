@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('startTime');
             $table->timestamp('endTime')->nullable();
             $table->unsignedBigInteger('hostId')->nullable();
-            $table->foreign('hostId')->references('id')->on('hosts')->onDelete('set null');
+            $table->foreign('hostId')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
         });
     }

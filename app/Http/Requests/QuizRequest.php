@@ -26,7 +26,7 @@ class QuizRequest extends FormRequest
             'description' => 'required|string',
             'startTime' => 'required|date',
             'endTime' => 'nullable|date',
-            'hostId' => 'nullable|exists:hosts,id',
+            'hostId' => 'nullable|exists:users,id',
         ];
     }
 }

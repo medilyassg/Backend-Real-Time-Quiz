@@ -12,7 +12,7 @@ class Quiz extends Model
 
     public function host()
     {
-        return $this->belongsTo(Host::class);
+        return $this->belongsTo(User::class);
     }
     public function questions()
     {

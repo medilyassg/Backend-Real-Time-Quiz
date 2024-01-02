@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Host;
 use App\Models\Quiz;
 
 /**
@@ -20,7 +20,7 @@ class QuizSessionFactory extends Factory
     {
         return [
         'quizId' => Quiz::factory(),
-        'hostId' => Host::factory(),
+        'hostId' => User::factory(),
         'startTime' => $this->faker->dateTime(),
         'endTime' => $this->faker->optional()->dateTime(),
         ];
