@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 class QuizRepository
 {
-    public function all()
+    public function all($userId)
     {
-        return Quiz::all();
+        return Quiz::where('hostId', $userId)->get();
     }
 
     public function find($id){

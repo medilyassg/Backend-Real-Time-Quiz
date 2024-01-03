@@ -49,7 +49,7 @@ Route::middleware(['web', 'api'])->group(function () {
 
             // Quiz
             Route::prefix('quizzes')->group(function () {
-                Route::get('/', [QuizController::class, 'index']);
+                Route::get('/{id}', [QuizController::class, 'index']);
                 Route::post('/', [QuizController::class, 'store']);
                 Route::put('{quiz}', [QuizController::class, 'update']);
                 Route::delete('{quiz}', [QuizController::class, 'destroy']);

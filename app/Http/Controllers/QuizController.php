@@ -18,9 +18,9 @@ class QuizController extends Controller
         $this->quizRepository = $quizRepository;
     }
 
-    public function index()
+    public function index($id)
     {
-        $quizzes = $this->quizRepository->all();
+        $quizzes = $this->quizRepository->all($id);
         return response()->json($quizzes);
     }
 
